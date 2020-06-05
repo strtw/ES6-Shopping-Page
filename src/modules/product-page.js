@@ -21,7 +21,7 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                                   </td>
                                   <td data-title="${row.title}">
                                       <input class="product-item__quantity" type="number" id="quantity" name="quantity" min="0" value="0">
-                                      <span class="product-item__cart-button"><button class="btn btn-primary btn-sm btn-block">Add to cart</button></span>
+                                      <span class="product-item__cart-button"><button class="product-item__cart-button btn btn-primary btn-sm btn-block" disabled>Add to cart</button></span>
                                   </td>
                                   <td>
                                       <div class="">
@@ -65,16 +65,38 @@ var shopping = (function shoppingUtils(products) {
     var productTitle = e.target.closest("tr").dataset.title
     var currentProduct = getCurrentProduct(productTitle)
     var quantityChanged = e.target.classList.contains("product-item__quantity")
-    var addedToCart = e.target.parentNode.classList.contains("product-item__cart-button")
+    var addedToCart = e.target.classList.contains("product-item__cart-button")
     
+    state.products.forEach((product)=>{
     if (quantityChanged) {
-        addQuantityToState(e,currentProduct)
+        var cartButton = e.target.nextElementSibling.querySelector("button")
+        e.target.addEventListener("keyup",(e)=>{
+          addQuantityToState(e,currentProduct,product)
+        })
+        addQuantityToState(e,currentProduct,product)
+        if(product.quantity > 0){
+          cartButton.disabled = false
+        }else{
+          if(product.inCart){
+             product.inCart = false
+             toggleCartButton(cartButton)
+          }
+          cartButton.disabled = true
+        }
+
     }
     if (addedToCart) {
-        addCartStatusToState(currentProduct)
-        toggleCartButton(e)
-      }
+        if(product.quantity > 0){
+          var cartButton = e.target 
+          addCartStatusToState(currentProduct,product)
+          toggleCartButton(cartButton)
+        }
+       
+    
   }
+})
+console.table(state.products)
+}
 
   function getCurrentProduct(productTitle){
       return state.products.filter(
@@ -82,20 +104,17 @@ var shopping = (function shoppingUtils(products) {
       )[0];
   }
 
-  function addQuantityToState(e,currentProduct) {      
-      state.products.forEach((product)=>{
+  function addQuantityToState(e,currentProduct,product) {    
         if(currentProduct.title === product.title){
           if (currentProduct.quantity !== e.target.value) {
             product.quantity = e.target.value;
           }
         }
-      })
-    console.table(state.products);
   }
 
-  function addCartStatusToState(currentProduct) {
+  function addCartStatusToState(currentProduct,product) {
     console.log(currentProduct,"status")
-      state.products.forEach((product)=>{
+      
         if(currentProduct.title === product.title){
           if (!currentProduct.inCart) {
             product.inCart = true;
@@ -103,23 +122,19 @@ var shopping = (function shoppingUtils(products) {
             product.inCart = false;
           }
         }
-      })
-      
-    console.table(state.products);
   }
 
-  function toggleCartButton(e){
-     var cartButton = e.target
-     console.log(cartButton)
-     if(cartButton.classList.contains('btn-primary')){
-       cartButton.classList.remove('btn-primary')
-       cartButton.classList.add('btn-danger')
-       cartButton.innerHTML = "Remove"
-     }else{
-      cartButton.classList.remove('btn-danger')
-      cartButton.classList.add('btn-primary')
-      cartButton.innerHTML = "Add to cart"
-     }
+  function toggleCartButton(cartButton){
+     //var cartButton = e.target
+      if(cartButton.classList.contains('btn-primary')){
+        cartButton.classList.remove('btn-primary')
+        cartButton.classList.add('btn-danger')
+        cartButton.innerHTML = "Remove"
+      }else{
+       cartButton.classList.remove('btn-danger')
+       cartButton.classList.add('btn-primary')
+       cartButton.innerHTML = "Add to cart"
+      }
   }
 
 document.getElementById('product-table').addEventListener("click", (e) => {
