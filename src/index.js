@@ -1,6 +1,6 @@
-import BuildProductPage from './modules/product-page'
+import {BuildProductPage,shopping} from './modules/product-page'
 
-export {BuildProductPage};
+export {BuildProductPage,shopping};
 
 
 
