@@ -24,7 +24,18 @@
     display:flex;
 }
 
-.product-item__cart-button{
-    float: right;
-    width: 104px;
+.product-item__cart-container-button{
+    float: right !important;
+    width: 104px !important;
+}
+
+.product-listing__add-select{
+    height: 23px !important;
+    font-size: 0.5em !important;
+    width: 110px !important;
+    font-weight: 500 !important;
+}
+
+.product-listing__checkbox-column{
+   text-align:center;
 }
