@@ -3,6 +3,11 @@ let productData = productList[0].productFacetInfoList; //get product array
 let productListings = document.getElementById("product-listing"); //get reference to main html element
 
 const BuildProductPage = (function ProductPageBuilder(products) {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  })
   function productTableMaker(data) {
     let tableRows = "";
     data.map((row) => {
@@ -28,7 +33,7 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                                 </td>
                                   <td>
                                       <div class="product-listing__price-column">
-                                          <h6>${row.price}</h6>
+                                          <h6>${formatter.format(row.price)}</h6>
                                       </div>
                                   </td>
                               </tr> `;
@@ -61,6 +66,12 @@ const BuildProductPage = (function ProductPageBuilder(products) {
 })(productData);
 
 var shopping = (function shoppingUtils(products) {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  })
+
   var state = {
     products: productData,
     total:0
@@ -191,14 +202,14 @@ var shopping = (function shoppingUtils(products) {
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">${product.title}</h6>
+              <span class="text-muted" style={float:"right"}>${product.quantity} x ${formatter.format(product.price)} = ${formatter.format(product.itemTotal)}</span>
             </div>
-            <span class="text-muted">${product.quantity}x${product.price} = ${product.itemTotal}</span>
           </li>
         `
           
         }
         checkout.innerHTML = cart
-        document.getElementById('cart-total').innerHTML = `$${state.total}`
+        document.getElementById('cart-total').innerHTML = `${formatter.format(state.total)}`
       })
     }
 
