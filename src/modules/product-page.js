@@ -40,7 +40,7 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                     <tr>
                         <th style="width: 16.66%">Product</th>
                         <th>Description</th>
-                        <th><button type="button" class="btn btn-info btn-sm product-listing__add-select" disabled>Add selected to cart</button></th>
+                        <th><button type="button" class="btn btn-info btn-sm product-listing__add-selected" disabled>Add selected to cart</button></th>
                         <th style="width: 16.66%">Quantity</th>
                         <th class="text-center" style="width: 16.66%">Price (USD)</th>
                     </tr>
@@ -65,64 +65,68 @@ var shopping = (function shoppingUtils(products) {
     products: productData,
   };
 
-  state.products.forEach((product)=>{
-    product.quantity = 0
-  })
+  state.products.forEach((product) => {
+    product.quantity = 0;
+  });
 
   function handleListingActions(e) {
+   // Boolean event listener variables indicate what action applied to
+    var quantityChanged = e.target.classList.contains("product-item__quantity");
+    var cartButtonClicked = e.target.classList.contains(
+      "product-item__cart-button"
+    );
+    var productChecked =
+      e.target.classList.contains("product-item__checkbox");
+    
+    //DOM variables
     var productTitle = e.target.closest("tr").dataset.title;
     var currentProduct = getCurrentProduct(productTitle);
-    var quantityChanged = e.target.classList.contains("product-item__quantity");
-    var cartButtonClicked = e.target.classList.contains("product-item__cart-button");
-    var productChecked = e.target.classList.contains("product-item__checkbox") && e.target.checked;
+    var selectAllCheckedButton = document.querySelector(".product-listing__add-selected")
 
-
-    if(quantityChanged){
-      var cartButton = e.target.nextElementSibling.firstChild
-      e.target.addEventListener('blur',()=>{
-        if(e.target.value == 0){
-          e.target.value = '0'
+    if (quantityChanged) {
+      var cartButton = e.target.nextElementSibling.firstChild;
+      e.target.addEventListener("blur", () => {
+        if (e.target.value == 0) {
+          e.target.value = "0";
         }
-      })
-     
-      if(e.target.value > 0){
-        cartButton.disabled = false; //disable the add to cart button
-       }else{
-        cartButton.disabled = true
-       }
+      });
 
-       e.target.value = e.target.value.replace(/^0+/, '')
+      if (e.target.value > 0) {
+        cartButton.disabled = false; //disable the add to cart button
+      } else {
+        cartButton.disabled = true;
+      }
+
+      e.target.value = e.target.value.replace(/^0+/, "");
     }
 
-      if (cartButtonClicked) {
-        var cartButton = e.target;
-        toggleCartButton(cartButton);
+    if (cartButtonClicked) {
+      var cartButton = e.target;
+      toggleCartButton(cartButton);
+    }
+
+    if (productChecked) {
+      var checkboxes = document.querySelectorAll(".product-item__checkbox")
+      checkboxes = Array.from(checkboxes)
+      const checked = (element) => element.checked;
+      selectAllCheckedButton.disabled = !checkboxes.some(checked)
     }
 
     state.products.forEach((product) => {
-
       if (quantityChanged) {
-        var cartButton = e.target.nextElementSibling.firstChild
+        var cartButton = e.target.nextElementSibling.firstChild;
         addQuantityToState(e, currentProduct, product);
 
-       if(currentProduct.quantity < 1 && currentProduct.inCart){
-         toggleCartButton(cartButton)
-         addCartStatusToState(currentProduct,product)
-       }
-
-      }  
+        if (currentProduct.quantity < 1 && currentProduct.inCart) {
+          toggleCartButton(cartButton);
+          addCartStatusToState(currentProduct, product);
+        }
+      }
 
       if (cartButtonClicked) {
-          var cartButton = e.target;
-          addCartStatusToState(currentProduct, product);
+        var cartButton = e.target;
+        addCartStatusToState(currentProduct, product);
       }
-
-      if(productChecked){
-
-      }
-
-
-
     });
     console.table(state.products);
   }
@@ -142,7 +146,6 @@ var shopping = (function shoppingUtils(products) {
   }
 
   function addCartStatusToState(currentProduct, product) {
-
     if (currentProduct.title === product.title) {
       if (!currentProduct.inCart) {
         product.inCart = true;
@@ -153,18 +156,17 @@ var shopping = (function shoppingUtils(products) {
   }
 
   function toggleCartButton(cartButton) {
-    console.log(cartButton.innerHTML)
+    console.log(cartButton.innerHTML);
     if (cartButton.innerHTML == "Add to cart") {
-      cartButton.classList.add('btn-danger')
-      cartButton.classList.remove('btn-primary')
+      cartButton.classList.add("btn-danger");
+      cartButton.classList.remove("btn-primary");
       cartButton.innerHTML = "Remove";
-    } else{
-      cartButton.classList.add('btn-primary')
-      cartButton.classList.remove('btn-danger')
+    } else {
+      cartButton.classList.add("btn-primary");
+      cartButton.classList.remove("btn-danger");
       cartButton.innerHTML = "Add to cart";
+    }
   }
-
-}
 
   document.getElementById("product-table").addEventListener("click", (e) => {
     handleListingActions(e);
