@@ -67,6 +67,7 @@ var shopping = (function shoppingUtils(products) {
 
   state.products.forEach((product) => {
     product.quantity = 0;
+    product.inCart = false
   });
 
   function handleListingActions(e) {
@@ -76,7 +77,7 @@ var shopping = (function shoppingUtils(products) {
       "product-item__cart-button"
     );
     var addAllSelectedToCart = e.target.classList.contains("product-listing__add-selected");
-    var productChecked =
+    var productCheckBoxClicked =
       e.target.classList.contains("product-item__checkbox");
     
     //DOM variables
@@ -99,6 +100,7 @@ var shopping = (function shoppingUtils(products) {
       } else {
         cartButton.disabled = true;
         checkBox.disabled = true;
+        checkBox.checked = false
       }
 
       e.target.value = e.target.value.replace(/^0+/, "");
@@ -109,7 +111,7 @@ var shopping = (function shoppingUtils(products) {
       toggleCartButton(cartButton);
     }
 
-    if (productChecked) {
+    if (productCheckBoxClicked || quantityChanged) {
       var checkboxes = document.querySelectorAll(".product-item__checkbox")
       checkboxes = Array.from(checkboxes)
       const checked = (element) => element.checked;
@@ -129,6 +131,13 @@ var shopping = (function shoppingUtils(products) {
     state.products.forEach((product)=>{
       if(selectedProductTitles.has(product.title) && product.quantity > 0){
          product.inCart = true
+         var currentProductRow = document.querySelector(`tr[data-title="${product.title}"]`)
+         var cartButton = currentProductRow.querySelector('.product-item__cart-button')
+         console.log(cartButton,'btn')
+         if(product.inCart && cartButton.innerHTML === "Add to cart"){
+          toggleCartButton(cartButton);
+         }
+        
       }else{
         product.inCart = false
       }
