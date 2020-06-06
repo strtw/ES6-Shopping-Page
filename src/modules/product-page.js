@@ -63,12 +63,27 @@ const BuildProductPage = (function ProductPageBuilder(products) {
 var shopping = (function shoppingUtils(products) {
   var state = {
     products: productData,
+    total:0
   };
 
   state.products.forEach((product) => {
     product.quantity = 0;
     product.inCart = false
   });
+
+  function itemTotal(item){
+    return item.price * item.quantity
+   }
+
+ function calculateCartTotal(cartItems){
+  var total = 0
+  cartItems.forEach((item)=>{
+    if(item.inCart){
+      total += itemTotal(item)
+    }
+  })
+  return total
+}
 
   function handleListingActions(e) {
    // Boolean event listener variables indicate what action applied to
@@ -161,7 +176,14 @@ var shopping = (function shoppingUtils(products) {
         addCartStatusToState(currentProduct, product);
       }
     });
-    console.table(state.products);
+    state.total = calculateCartTotal(state.products)
+    state.products.forEach((product)=>{
+      product.itemTotal = itemTotal(product)
+    })
+
+    document.getElementById('cart-total').innerHTML = `$${state.total}`
+    console.table(state);
+    console.table(state.products)
   }
 
   function getCurrentProduct(productTitle) {
