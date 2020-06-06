@@ -20,7 +20,7 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                                       </div>
                                   </td>
                                   <td class="product-listing__checkbox-column">
-                                  <input class="product-item__checkbox" type="checkbox">
+                                  <input class="product-item__checkbox" type="checkbox" disabled>
                                   </td>
                                 <td data-title="${row.title}">
                                     <input class="product-item__quantity" type="number" id="quantity" name="quantity" min="0" value="0">
@@ -75,6 +75,7 @@ var shopping = (function shoppingUtils(products) {
     var cartButtonClicked = e.target.classList.contains(
       "product-item__cart-button"
     );
+    var addAllSelectedToCart = e.target.classList.contains("product-listing__add-selected");
     var productChecked =
       e.target.classList.contains("product-item__checkbox");
     
@@ -85,6 +86,7 @@ var shopping = (function shoppingUtils(products) {
 
     if (quantityChanged) {
       var cartButton = e.target.nextElementSibling.firstChild;
+      var checkBox = e.target.parentElement.previousElementSibling.firstElementChild
       e.target.addEventListener("blur", () => {
         if (e.target.value == 0) {
           e.target.value = "0";
@@ -92,9 +94,11 @@ var shopping = (function shoppingUtils(products) {
       });
 
       if (e.target.value > 0) {
+        checkBox.disabled = false
         cartButton.disabled = false; //disable the add to cart button
       } else {
         cartButton.disabled = true;
+        checkBox.disabled = true;
       }
 
       e.target.value = e.target.value.replace(/^0+/, "");
@@ -110,6 +114,26 @@ var shopping = (function shoppingUtils(products) {
       checkboxes = Array.from(checkboxes)
       const checked = (element) => element.checked;
       selectAllCheckedButton.disabled = !checkboxes.some(checked)
+    }
+
+    if(addAllSelectedToCart){
+      var checkboxes = document.querySelectorAll(".product-item__checkbox")
+      var selectedProductTitles = new Set()
+      checkboxes.forEach((checkBox)=>{
+        if(checkBox.checked){
+          var productTitle = checkBox.closest("tr").dataset.title;
+          selectedProductTitles.add(productTitle)
+        }
+      })
+
+    state.products.forEach((product)=>{
+      if(selectedProductTitles.has(product.title) && product.quantity > 0){
+         product.inCart = true
+      }else{
+        product.inCart = false
+      }
+    })
+      
     }
 
     state.products.forEach((product) => {
