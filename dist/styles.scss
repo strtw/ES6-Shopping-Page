@@ -1,0 +1,142 @@
+[role="main"] {
+    padding-top: 48px;
+}
+
+.product-item__image{
+    width:100%
+}
+
+.product-item__quantity{
+    width:55px;
+}
+
+.product-item__main{
+    display:flex;
+}
+
+.product-item__cart-container-button{
+    float: right !important;
+    width: 88px !important;
+    top: 2px !important;
+    position: relative !important;
+}
+
+.product-item__cart-button{
+  font-size:.6em !important;
+}
+
+.product-listing__add-selected{
+    height: 23px !important;
+    font-size: 0.5em !important;
+    width: 110px !important;
+    font-weight: 500 !important;
+}
+
+.product-listing__checkbox-column{
+   text-align:center;
+}
+
+.product-listing__price-column{
+  text-align:center;
+}
+
+.product-listing__description{
+  font-size:.9em;
+}
+
+.sticky{
+    position: fixed;
+    width: 200px;
+}
+  
+  .feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+  }
+  
+  /*
+   * Sidebar
+   */
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 40;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    left: 100;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    width:100%;
+    padding:.5rem;
+  }
+  
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 39px;
+      left:100
+    }
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #007bff;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+  
+  /*
+   * Content
+   */
+  
+  [role="main"] {
+    padding-top: 48px; /* Space for fixed navbar */
+  }
+  
+  /*
+   * Navbar
+   */
+  
+  .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+
+  //Cart
+
+  .shopping-cart{
+    position: relative;
+    left: -4px;
+  }

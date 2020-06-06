@@ -14,9 +14,9 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                                       </div>
                                   </td>
                                   <td>
-                                      <div class="">
-                                          <a href="${row.productPagepath}"><h4>${row.title}</h4></a>
-                                          <p>${row.shortDescription}</p>
+                                      <div>
+                                          <a href="${row.productPagepath}"><h6>${row.title}</h6></a>
+                                          <p class="product-listing__description">${row.shortDescription}</p>
                                       </div>
                                   </td>
                                   <td class="product-listing__checkbox-column">
@@ -27,8 +27,8 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                                     <span class="product-item__cart-container-button"><button class="product-item__cart-button btn btn-primary btn-sm btn-block" disabled>Add to cart</button></span>
                                 </td>
                                   <td>
-                                      <div class="">
-                                          <h5>${row.price}</h5>
+                                      <div class="product-listing__price-column">
+                                          <h6>${row.price}</h6>
                                       </div>
                                   </td>
                               </tr> `;
@@ -181,7 +181,28 @@ var shopping = (function shoppingUtils(products) {
       product.itemTotal = itemTotal(product)
     })
 
-    document.getElementById('cart-total').innerHTML = `$${state.total}`
+    function insertCartDataIntoCheckout(products){
+      var checkout = document.getElementById("checkout-cart")
+      var cart = '';
+      products.forEach((product)=>{
+        if(product.inCart){
+          cart +=
+          `
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">${product.title}</h6>
+            </div>
+            <span class="text-muted">${product.quantity}x${product.price} = ${product.itemTotal}</span>
+          </li>
+        `
+          
+        }
+        checkout.innerHTML = cart
+        document.getElementById('cart-total').innerHTML = `$${state.total}`
+      })
+    }
+
+    insertCartDataIntoCheckout(state.products)
     console.table(state);
     console.table(state.products)
   }
