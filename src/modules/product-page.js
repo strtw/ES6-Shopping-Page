@@ -1,7 +1,6 @@
 import { productList } from "../product-dummy-list.json";
 let productData = productList[0].productFacetInfoList; //get product array
 let productListings = document.getElementById("product-listing"); //get reference to main html element
-
 const BuildProductPage = (function ProductPageBuilder(products) {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -194,31 +193,57 @@ var shopping = (function shoppingUtils(products) {
     state.products.forEach((product)=>{
       product.itemTotal = itemTotal(product)
     })
-
-    function insertCartDataIntoCheckout(products){
-      var checkout = document.getElementById("checkout-cart")
-      var cart = '';
-      products.forEach((product)=>{
-        if(product.inCart){
-          cart +=
-          `
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">${product.title}</h6>
-              <span class="text-muted" style={float:"right"}>${product.quantity} x ${formatter.format(product.price)} = ${formatter.format(product.itemTotal)}</span>
-            </div>
-          </li>
-        `
-          
-        }
-        checkout.innerHTML = cart
-        document.getElementById('cart-total').innerHTML = `${formatter.format(state.total)}`
-      })
-    }
-
     insertCartDataIntoCheckout(state.products)
     console.table(state);
     console.table(state.products)
+  }
+
+  function insertCartDataIntoCheckout(products){
+    var checkout = document.getElementById("checkout-cart")
+    var cart = '';
+    products.forEach((product)=>{
+      if(product.inCart){
+        cart +=
+        `
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 data-title="${product.title}">${product.title}</h6>
+            <span class="text-muted" style={float:"right"}>${product.quantity} x ${formatter.format(product.price)} = ${formatter.format(product.itemTotal)}</span>
+            <span class="product-checkout__trash-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></span>
+            </div>
+        </li>
+      `
+        
+      }
+      checkout.innerHTML = cart
+      writeCartTotal();
+    })
+  }
+
+  function writeCartTotal(){
+    document.getElementById('cart-total').innerHTML = `${formatter.format(state.total)}`
+  }
+
+  function handleCheckoutActions(e){
+    
+    var cartTrashIcon = e.target.closest('.product-checkout__trash-icon')
+   
+    if(cartTrashIcon){
+      var productTitle = cartTrashIcon.previousElementSibling.previousElementSibling.dataset.title
+      state.products.forEach((product) => {
+        if(product.title === productTitle){
+          product.inCart = false;
+          product.quantity = 0;
+          product.itemTotal = 0;
+          console.log(productTitle,product.title)
+        }
+      })
+      insertCartDataIntoCheckout(state.products);
+      state.total = calculateCartTotal(state.products)
+      writeCartTotal();
+    }
+   
+   console.table(state.products)
   }
 
   function getCurrentProduct(productTitle) {
@@ -264,6 +289,11 @@ var shopping = (function shoppingUtils(products) {
 
   document.getElementById("product-table").addEventListener("keyup", (e) => {
     handleListingActions(e);
+  });
+
+  document.getElementById("checkout-cart").addEventListener("click", (e) => {
+
+    handleCheckoutActions(e);
   });
 })();
 
