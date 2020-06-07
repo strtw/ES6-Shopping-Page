@@ -194,4 +194,12 @@ th {
   height: 50px;
   display: inline-block;
 }
+
+.cart-add {
+  position: absolute;
+  bottom: 0px;
+  left: 59%;
+  padding: 25px;
+  background-color: lightblue;
+}
 /*# sourceMappingURL=styles.css.map */

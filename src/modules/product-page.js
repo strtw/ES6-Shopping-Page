@@ -1,6 +1,13 @@
 import { productList } from "../product-dummy-list.json";
 let productData = productList[0].productFacetInfoList; //get product array
 let productListings = document.getElementById("product-listing"); //get reference to main html element
+
+var state = {
+  products: productData,
+  total:0,
+  itemsSelected:0
+};
+
 const BuildProductPage = (function ProductPageBuilder(products) {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -23,12 +30,8 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                                           <p class="product-listing__description">${row.shortDescription}</p>
                                       </div>
                                   </td>
-                                  <td class="product-listing__checkbox-column">
-                                  <input class="product-item__checkbox" type="checkbox" disabled>
-                                  </td>
                                 <td data-title="${row.title}">
                                     <input class="product-item__quantity" type="number" id="quantity" name="quantity" min="0" value="0">
-                                    <span class="product-item__cart-container-button"><button class="product-item__cart-button btn btn-primary btn-sm btn-block" disabled>Add to cart</button></span>
                                 </td>
                                   <td>
                                       <div class="product-listing__price-column">
@@ -40,13 +43,12 @@ const BuildProductPage = (function ProductPageBuilder(products) {
     });
     // Return the table with the inserted tableRows
     return `
-    <div class="table-fix">
-    <table class="table" id="product-table">
+    <div class="table-fix" id="product-table">
+    <table class="table">
                 <thead>
                     <tr>
                         <th style="width: 16.66%">Product</th>
                         <th>Description</th>
-                        <th><button type="button" class="btn btn-success btn-sm product-listing__add-selected" disabled>Add selected to cart</button></th>
                         <th style="width: 16.66%">Quantity</th>
                         <th class="text-center" style="width: 16.66%">Price (USD)</th>
                     </tr>
@@ -63,6 +65,7 @@ const BuildProductPage = (function ProductPageBuilder(products) {
     return;
   }
 
+  
   //Internal function executions
   buildProductListing(products);
 })(productData);
@@ -74,36 +77,24 @@ var shopping = (function shoppingUtils(products) {
     minimumFractionDigits: 2
   })
 
-  var state = {
-    products: productData,
-    total:0
-  };
+  
 
   state.products.forEach((product) => {
     product.quantity = 0;
     product.inCart = false
   });
 
-  function itemTotal(item){
-    return item.price * item.quantity
-   }
-
- function calculateCartTotal(cartItems){
-  var total = 0
-  cartItems.forEach((item)=>{
-    if(item.inCart){
-      total += itemTotal(item)
-    }
-  })
-  return total
-}
+  
 
   function handleListingActions(e) {
+   
    // Boolean event listener variables indicate what action applied to
     var quantityChanged = e.target.classList.contains("product-item__quantity");
-    var cartButtonClicked = e.target.classList.contains(
-      "product-item__cart-button"
+    var addToCartButtonClicked = e.target.classList.contains(
+      "cart-add__button"
     );
+    console.log(e.target)
+    console.log(addToCartButtonClicked,'button')
     var addAllSelectedToCart = e.target.classList.contains("product-listing__add-selected");
     var productCheckBoxClicked =
       e.target.classList.contains("product-item__checkbox");
@@ -114,79 +105,39 @@ var shopping = (function shoppingUtils(products) {
     var selectAllCheckedButton = document.querySelector(".product-listing__add-selected")
 
     if (quantityChanged) {
-      var cartButton = e.target.nextElementSibling.firstChild;
-      var checkBox = e.target.parentElement.previousElementSibling.firstElementChild
       e.target.addEventListener("blur", () => {
         if (e.target.value == 0) {
           e.target.value = "0";
         }
       });
-
-      if (e.target.value > 0) {
-        checkBox.disabled = false
-        cartButton.disabled = false; //disable the add to cart button
-      } else {
-        cartButton.disabled = true;
-        checkBox.disabled = true;
-        checkBox.checked = false
-      }
-
       e.target.value = e.target.value.replace(/^0+/, "");
-    }
-
-    if (cartButtonClicked) {
-      var cartButton = e.target;
-      toggleCartButton(cartButton);
-    }
-
-    if (productCheckBoxClicked || quantityChanged) {
-      var checkboxes = document.querySelectorAll(".product-item__checkbox")
-      checkboxes = Array.from(checkboxes)
-      const checked = (element) => element.checked;
-      selectAllCheckedButton.disabled = !checkboxes.some(checked)
-    }
-
-    if(addAllSelectedToCart){
-      var checkboxes = document.querySelectorAll(".product-item__checkbox")
-      var selectedProductTitles = new Set()
-      checkboxes.forEach((checkBox)=>{
-        if(checkBox.checked){
-          var productTitle = checkBox.closest("tr").dataset.title;
-          selectedProductTitles.add(productTitle)
-        }
-      })
-
-    state.products.forEach((product)=>{
-      if(selectedProductTitles.has(product.title) && product.quantity > 0){
-         product.inCart = true
-         var currentProductRow = document.querySelector(`tr[data-title="${product.title}"]`)
-         var cartButton = currentProductRow.querySelector('.product-item__cart-button')
-         console.log(cartButton,'btn')
-         if(product.inCart && cartButton.innerHTML === "Add to cart"){
-          toggleCartButton(cartButton);
-         }
-        
-      }else{
-        product.inCart = false
-      }
-    })
-      
     }
 
     state.products.forEach((product) => {
       if (quantityChanged) {
-        var cartButton = e.target.nextElementSibling.firstChild;
+        
         addQuantityToState(e, currentProduct, product);
+        addNumItemsSelectedToState()
 
-        if (currentProduct.quantity < 1 && currentProduct.inCart) {
-          toggleCartButton(cartButton);
+        updateCartButton(currentProduct, product)
+
+        function updateCartButton(currentProduct, product) {
+          if (currentProduct.title === product.title) {
+            if (!currentProduct.inCart) {
+              updateAddToCartButton()
+            }
+          }
+        }
+
+        if (currentProduct.quantity < 1 && currentProduct.inCart) {//remove the item from checkout
           addCartStatusToState(currentProduct, product);
         }
       }
+      console.log(state.itemsSelected,"seleced")
 
-      if (cartButtonClicked) {
-        var cartButton = e.target;
-        addCartStatusToState(currentProduct, product);
+      if(addToCartButtonClicked){
+        product.inCart = true;
+        console.log("button click")
       }
     });
     state.total = calculateCartTotal(state.products)
@@ -198,11 +149,13 @@ var shopping = (function shoppingUtils(products) {
     console.table(state.products)
   }
 
+ 
+
   function insertCartDataIntoCheckout(products){
     var checkout = document.getElementById("checkout-cart")
     var cart = '';
     products.forEach((product)=>{
-      if(product.inCart){
+      if(product.inCart && product.quantity > 0){
         cart +=
         `
         <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -220,31 +173,104 @@ var shopping = (function shoppingUtils(products) {
     })
   }
 
+  //Helper functions//
+
+  function addItemsToCart(){
+    state.product.forEach((product)=>{
+      if(product.quantity > 0 ){
+        product.inCart = true
+      }
+    })
+  }
+
+  function addNumItemsSelectedToState(){
+    var totalItems = 0
+    state.products.forEach((product)=>{
+      if(!product.inCart){
+        totalItems += parseInt(product.quantity)
+      }
+       
+    })
+    state.itemsSelected = totalItems
+  }
+
+  function updateAddToCartButton(){
+    var button = document.querySelector('.cart-add button');
+    var buttonText;
+    if(state.itemsSelected > 0){
+      buttonText = `Add ${state.itemsSelected} item(s) to cart`
+      button.disabled = false
+    }else{
+      buttonText = 'Add to cart'
+      button.disabled = true
+    }
+    button.innerHTML = buttonText
+  }
+  
+
+  function itemTotal(item){
+    return item.price * item.quantity
+   }
+
+ function calculateCartTotal(cartItems){
+  var total = 0
+  cartItems.forEach((item)=>{
+    if(item.inCart){
+      total += itemTotal(item)
+    }
+  })
+  return total
+}
+
   function writeCartTotal(){
     document.getElementById('cart-total').innerHTML = `${formatter.format(state.total)}`
   }
 
+  function resetItemQuantityInput(element){
+    element.value = 0
+  }
+
   function handleCheckoutActions(e){
     
+
+    (function removeItemFromCheckout(){
     var cartTrashIcon = e.target.closest('.product-checkout__trash-icon')
    
     if(cartTrashIcon){
       var productTitle = cartTrashIcon.previousElementSibling.previousElementSibling.dataset.title
       state.products.forEach((product) => {
         if(product.title === productTitle){
+          var productQuantity = document.querySelector(`tr[data-title="${product.title}"] .product-item__quantity`)
           product.inCart = false;
           product.quantity = 0;
           product.itemTotal = 0;
-          console.log(productTitle,product.title)
+          resetItemQuantityInput(productQuantity)
         }
       })
       insertCartDataIntoCheckout(state.products);
       state.total = calculateCartTotal(state.products)
       writeCartTotal();
+     
     }
+  })()
    
    console.table(state.products)
   }
+
+  function handleCartAdd(e){
+
+    state.products.forEach((product) => {
+      if(product.quantity > 0){
+        product.inCart = true;
+        console.table(state.products)
+      }
+  })
+  insertCartDataIntoCheckout(state.products);
+  state.itemsSelected = 0
+  updateAddToCartButton()
+  
+}
+
 
   function getCurrentProduct(productTitle) {
     return state.products.filter(
@@ -255,31 +281,16 @@ var shopping = (function shoppingUtils(products) {
   function addQuantityToState(e, currentProduct, product) {
     if (currentProduct.title === product.title) {
       if (currentProduct.quantity !== e.target.value) {
-        product.quantity = e.target.value;
+        product.quantity = e.target.value == isNaN(e.target.value) ? 0 : e.target.value
       }
     }
   }
 
   function addCartStatusToState(currentProduct, product) {
     if (currentProduct.title === product.title) {
-      if (!currentProduct.inCart) {
-        product.inCart = true;
-      } else {
-        product.inCart = false;
-      }
-    }
-  }
-
-  function toggleCartButton(cartButton) {
-    console.log(cartButton.innerHTML);
-    if (cartButton.innerHTML == "Add to cart") {
-      cartButton.classList.add("btn-danger");
-      cartButton.classList.remove("btn-primary");
-      cartButton.innerHTML = "Remove";
-    } else {
-      cartButton.classList.add("btn-primary");
-      cartButton.classList.remove("btn-danger");
-      cartButton.innerHTML = "Add to cart";
+      if (currentProduct.inCart && currentProduct.quantity < 1) {
+        product.inCart = false
+      } 
     }
   }
 
@@ -290,6 +301,11 @@ var shopping = (function shoppingUtils(products) {
   document.getElementById("product-table").addEventListener("keyup", (e) => {
     handleListingActions(e);
   });
+
+  document.getElementById('cart-add__button').addEventListener("click",(e) =>{
+    handleCartAdd(e)
+       
+  })
 
   document.getElementById("checkout-cart").addEventListener("click", (e) => {
 
