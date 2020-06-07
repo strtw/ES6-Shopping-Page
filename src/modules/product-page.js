@@ -45,7 +45,7 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                     <tr>
                         <th style="width: 16.66%">Product</th>
                         <th>Description</th>
-                        <th><button type="button" class="btn btn-info btn-sm product-listing__add-selected" disabled>Add selected to cart</button></th>
+                        <th><button type="button" class="btn btn-success btn-sm product-listing__add-selected" disabled>Add selected to cart</button></th>
                         <th style="width: 16.66%">Quantity</th>
                         <th class="text-center" style="width: 16.66%">Price (USD)</th>
                     </tr>

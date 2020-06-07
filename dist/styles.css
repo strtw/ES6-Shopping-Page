@@ -34,6 +34,14 @@
   font-weight: 500 !important;
 }
 
+.product-listing {
+  border: 1px solid #F8F9FA !important;
+}
+
+.table {
+  border: 1px solid #DFE0E1;
+}
+
 .product-listing__checkbox-column {
   text-align: center;
 }
@@ -141,5 +149,9 @@
 .shopping-cart {
   position: relative;
   left: -4px;
+}
+
+table {
+  background-color: white;
 }
 /*# sourceMappingURL=styles.css.map */
