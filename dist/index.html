@@ -13,6 +13,10 @@
    </nav>
     <div class="container-fluid">
         <div class="row">
+           
+            <main id="product-listing" role="main" class="col product-listing" >
+               <!-- Product table inserts here dynamically-->
+            </main>
             <nav class="col-md-3 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column shopping-cart">
@@ -28,19 +32,12 @@
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Checkout</button>
                         </li>
                         <ul id="checkout-cart"  class="checkout-cart list-group mb-3">
+                            <!--Checkout items inserted here dynamically-->
                         </ul>
                          
                     </ul>
                 </div>
             </nav>
-            <main id="product-listing" role="main" class="col product-listing" >
-                <tr>
-                    <th style="width: 16.66%">Product</th>
-                    <th>Description</th>
-                    <th style="width: 16.66%">Quantity</th>
-                    <th class="text-center" style="width: 16.66%">Price (USD)</th>
-                </tr>
-            </main>
         </div>  
     </div>
     <script src="./bundle.js"></script>

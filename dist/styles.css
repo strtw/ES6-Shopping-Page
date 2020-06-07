@@ -154,4 +154,35 @@
 table {
   background-color: white;
 }
+
+.table-fix {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.table-fix thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+
+/* Just common table stuff. Really. */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px 16px;
+}
+
+th {
+  background: #eee;
+}
+
+.table-fix th {
+  -webkit-box-shadow: 0 0 1px 0 grey;
+          box-shadow: 0 0 1px 0 grey;
+}
 /*# sourceMappingURL=styles.css.map */

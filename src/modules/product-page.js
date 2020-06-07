@@ -40,7 +40,9 @@ const BuildProductPage = (function ProductPageBuilder(products) {
       tableRows = currentRow + tableRows; //add each row to the previous row
     });
     // Return the table with the inserted tableRows
-    return `<table class="table" id="product-table">
+    return `
+    <div class="table-fix">
+    <table class="table" id="product-table">
                 <thead>
                     <tr>
                         <th style="width: 16.66%">Product</th>
@@ -53,7 +55,8 @@ const BuildProductPage = (function ProductPageBuilder(products) {
                 <tbody>
                     ${tableRows} 
                 </tbody>
-            </table>`;
+            </table>
+            </div>`;
   }
 
   function buildProductListing(products) {
