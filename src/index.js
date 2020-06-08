@@ -1,6 +1,7 @@
 import {BuildShoppingPage} from './modules/BuildShoppingPage'
 import { productList } from "./product-dummy-list.json";
 import  shoppingUtils  from './modules/shoppingPageLogic.js'
+import './styles/styles.css'
 let productData = productList[0].productFacetInfoList; //get product array
 
 
