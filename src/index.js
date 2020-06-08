@@ -1,6 +1,6 @@
-import {BuildShoppingPage} from './modules/product-page'
+import {BuildShoppingPage} from './modules/BuildShoppingPage'
 import { productList } from "./product-dummy-list.json";
-import  shoppingUtils  from './modules/shoppingUtils.js'
+import  shoppingUtils  from './modules/shoppingPageLogic.js'
 let productData = productList[0].productFacetInfoList; //get product array
 
 
@@ -10,11 +10,12 @@ var state = {
     itemsSelected: 0,
   };
 
-window.shoppingUtils = shoppingUtils(state)
-
-BuildShoppingPage.updateProducts(state.products) //Page defaults to loading supplied data or you can update it with public method
 
 //Just a hook to be able to view shopping cart data in the console to show that the public API works
+window.shoppingUtils = shoppingUtils(state)
+
+BuildShoppingPage.updateProducts(state.products) //Method that loads the product data
+
 
 
 

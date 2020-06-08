@@ -1,22 +1,6 @@
-const BuildShoppingPage = (function ProductPageBuilder(products) {
-  const currencyFormatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  });
+import {currencyFormatter} from '../utils/shoppingHelpers'
 
-  let productListings = document.getElementById("product-listing"); //get reference to main html element
-
-  //Helper Functions
-
-  function updateProductListing(products) {
-    if(products){
-      productListings.innerHTML = productTableMaker(products); //insert product table into main element
-    //  shoppingUtils.setProductState(products)
-    }
-  
-  }
-  function productTableMaker(data) {
+export const productTableMaker = function productTableMaker(data) {
     let tableRows = "";
     data.map((row) => {
       //loop through each row, data-title attribute in the price selector input to get reference to the data to be used in DOM event listeners
@@ -69,16 +53,3 @@ const BuildShoppingPage = (function ProductPageBuilder(products) {
             </table>
             </div>`;
   }
-
-
-
-  var publicAPI = {
-    updateProducts:updateProductListing
-  }
-
-  return publicAPI
-
-})();
-
-
-export { BuildShoppingPage};
