@@ -23,7 +23,11 @@ export const productTableMaker = function productTableMaker(data) {
                                       </div>
                                   </td>
                                 <td data-title="${row.title}">
-                                    <input class="product-item__quantity" type="number" id="quantity" name="quantity" min="0" value="0">
+                                    <div class="product-quantity-input">
+                                    <input class="product-item__quantity" type="text" name="quantity" min="0" value="0">
+                                    <span class="fa fa-caret-up increment product-quantity__control"></span>
+                                    <span class="fa fa-caret-down decrement product-quantity__control"></span>
+                                    </div>
                                 </td>
                                   <td>
                                       <div class="product-listing__price-column">
@@ -43,7 +47,7 @@ export const productTableMaker = function productTableMaker(data) {
                     <tr>
                         <th style="width: 16.66%">Product</th>
                         <th>Description</th>
-                        <th style="width: 16.66%">Quantity</th>
+                        <th style="width: 16.66%">Adjust Quantity</th>
                         <th class="text-center" style="width: 16.66%">Price (USD)</th>
                     </tr>
                 </thead>

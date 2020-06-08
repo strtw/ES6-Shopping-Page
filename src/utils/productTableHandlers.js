@@ -3,24 +3,35 @@ import {insertCartDataIntoCheckout,updateStateWithCartTotal,itemTotal,updateAddT
 export const handleProductTableEvents = function handleProductTableEvents(e,state) {
     // Boolean event listener variables indicate what action applied to
     var userChangesItemQuantity = e.target.classList.contains(
-      "product-item__quantity"
+      "product-quantity__control"
     );
+
     var addToCartButtonClicked = e.target.classList.contains(
       "cart-add__button"
     );
+
+    var quantityInputs = document.querySelectorAll('.product-item__quantity')
+    
+    quantityInputs.forEach((input)=>{
+      input.addEventListener('blur',()=>{
+        resetInputToZero(input);
+        replaceLeadingInputZero(input);
+      })
+    })
     //DOM variables
     var productTitle = e.target.closest("tr").dataset.title;
     var currentProduct = getCurrentProduct(productTitle);
 
     //Conditionals that check for an action and execute logic
     if (userChangesItemQuantity) {
-      resetInputToZero(e);
-      replaceLeadingInputZero(e);
+      var quantityInput = e.target.closest(".product-quantity-input").firstElementChild
+     
+      changeItemQuantity(quantityInput,e.target)
     }
 
     state.products.forEach((product) => {
       if (userChangesItemQuantity) {
-        addQuantityToState(e, currentProduct, product);
+        addQuantityToState(quantityInput, currentProduct, product);
         addNumItemsSelectedToState();
         updateCartButton(currentProduct, product);
         //remove the item from checkout
@@ -37,6 +48,16 @@ export const handleProductTableEvents = function handleProductTableEvents(e,stat
     insertCartDataIntoCheckout(state.products,state.total);
 
     //Helper functions
+
+    function changeItemQuantity(element,target){
+      if(target.classList.contains('decrement')){
+        if(quantityInput.value > 0){
+          quantityInput.value = parseInt(quantityInput.value) - 1
+        }
+      }else{
+        quantityInput.value = parseInt(quantityInput.value) + 1
+      }
+    }
 
     function getCurrentProduct(productTitle) {
         return state.products.filter(
@@ -58,23 +79,25 @@ export const handleProductTableEvents = function handleProductTableEvents(e,stat
       }
     }
 
-    function replaceLeadingInputZero(e) {
+    function replaceLeadingInputZero(element) {
       //Users shouldn't be able to select 002 as a quantity, only 2
-      e.target.value = e.target.value.replace(/^0+/, "");
+      element.value = parseInt(element.value);
     }
 
-    function resetInputToZero(e) {
-      e.target.addEventListener("blur", () => {
-        if (e.target.value == 0) {
-          e.target.value = "0";
+    function resetInputToZero(element) {
+      console.log(element,element.value)
+      element.addEventListener("blur", () => {
+        console.log('blur')
+        if (element.value == 0) {
+          element.value = "0";
         }
       });
     }
-    function addQuantityToState(e, currentProduct, product) {
+    function addQuantityToState(element, currentProduct, product) {
         if (currentProduct.title === product.title) {
           if (currentProduct.quantity !== e.target.value) {
             product.quantity =
-              e.target.value == isNaN(e.target.value) ? 0 : e.target.value;
+              element.value == isNaN(element.value) ? 0 : element.value;
           }
         }
       }

@@ -9,6 +9,7 @@
 
 .product-item__quantity{
     width:55px;
+    border:none;
 }
 
 .product-item__main{
@@ -206,3 +207,53 @@ th     { background:#eee; }
 .table__blank-row td{
   border:none !important;
 }
+
+.product-quantity-input{
+  width: 70px;
+  float:left; 
+  position: relative;
+  padding-right: 0px;
+  padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.product-quantity-input .fa {
+  font-size: 16px;
+  position: absolute;
+  right: 5px;
+  border-left: 1px solid #e5e5e5;
+  padding-left: 4px;
+}
+
+.product-quantity-input input {
+  width: 100%;
+}
+  .product-quantity-input .fa:hover {
+    cursor: pointer;
+  }
+.product-quantity-input .fa {
+  font-size: 16px;
+  position: absolute;
+  right: 5px;
+  border-left: 1px solid #e5e5e5;
+  padding-left: 4px;
+}
+.product-quantity-input .fa-caret-up {
+    top: 3px;
+  }
+  .product-quantity-input .fa-caret-down {
+    bottom: 3px;
+  }
+
+  .fa-caret-down:before {
+    content: "\f0d7";
+  }
+  .fa-caret-up:before {
+    content: "\f0d8";
+  }
