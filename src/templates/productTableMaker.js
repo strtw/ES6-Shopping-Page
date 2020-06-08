@@ -49,6 +49,9 @@ export const productTableMaker = function productTableMaker(data) {
                 </thead>
                 <tbody>
                     ${tableRows} 
+                    <tr class="table__blank-row">
+                    <td></td>
+                    </tr>
                 </tbody>
             </table>
             </div>

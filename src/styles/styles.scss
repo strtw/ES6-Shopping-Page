@@ -198,3 +198,11 @@ th     { background:#eee; }
 .container-fluid{
   position:fixed;
 }
+
+.table__blank-row{
+  height: 100px !important;
+}
+
+.table__blank-row td{
+  border:none !important;
+}
