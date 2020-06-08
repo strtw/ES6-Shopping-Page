@@ -55,7 +55,7 @@ const BuildShoppingPage = (function ProductPageBuilder(products) {
                                       </div>
                                   </td>
                               </tr> `;
-      tableRows = currentRow + tableRows; //add each row to the previous row
+      tableRows = tableRows + currentRow ; //add each row to the previous row
     });
     // Return the table with the inserted tableRows
     return `
