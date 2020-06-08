@@ -51,5 +51,9 @@ export const productTableMaker = function productTableMaker(data) {
                     ${tableRows} 
                 </tbody>
             </table>
-            </div>`;
+            </div>
+            <div id="cart-add" class="cart-add">
+            <button id="cart-add__button" class="cart-add__button btn btn-outline-success" disabled>Select items to add</button>
+           </div>
+            `;
   }

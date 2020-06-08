@@ -1,4 +1,4 @@
-import {insertCartDataIntoCheckout,updateStateWithCartTotal,itemTotal} from './shoppingHelpers'
+import {insertCartDataIntoCheckout,updateStateWithCartTotal,itemTotal,updateAddToCartButton} from './shoppingHelpers'
 
 export const handleProductTableEvents = function handleProductTableEvents(e,state) {
     // Boolean event listener variables indicate what action applied to
@@ -53,7 +53,7 @@ export const handleProductTableEvents = function handleProductTableEvents(e,stat
     function updateCartButton(currentProduct, product) {
       if (currentProduct.title === product.title) {
         if (!currentProduct.inCart) {
-          updateAddToCartButton();
+          updateAddToCartButton(state);
         }
       }
     }
@@ -95,18 +95,5 @@ export const handleProductTableEvents = function handleProductTableEvents(e,stat
           }
         });
         state.itemsSelected = totalItems;
-      }
-
-      function updateAddToCartButton() {
-        var button = document.querySelector(".cart-add button");
-        var buttonText;
-        if (state.itemsSelected > 0) {
-          buttonText = `Add ${state.itemsSelected} item(s) to cart`;
-          button.disabled = false;
-        } else {
-          buttonText = "Add to cart";
-          button.disabled = true;
-        }
-        button.innerHTML = buttonText;
       }
   }

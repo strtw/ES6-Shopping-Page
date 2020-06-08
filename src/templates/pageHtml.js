@@ -5,9 +5,6 @@ export const pageHtml =
             <main id="product-listing" role="main" class="col product-listing" >
                <!-- Product table inserts here dynamically-->
             </main>
-            <div class="cart-add">
-                <button id="cart-add__button" class="cart-add__button" disabled>Add items to cart</button>
-            </div>
             <nav class="col-md-3 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column shopping-cart">

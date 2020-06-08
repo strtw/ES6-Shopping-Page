@@ -70,14 +70,14 @@ export const itemTotal = function itemTotal(item) {
     return item.price * item.quantity;
   }
 
-  function updateAddToCartButton(state) {
+ export const updateAddToCartButton = function updateAddToCartButton(state) {
     var button = document.querySelector(".cart-add button");
     var buttonText;
     if (state.itemsSelected > 0) {
       buttonText = `Add ${state.itemsSelected} item(s) to cart`;
       button.disabled = false;
     } else {
-      buttonText = "Add to cart";
+      buttonText = `Select item(s) to add`;
       button.disabled = true;
     }
     button.innerHTML = buttonText;
