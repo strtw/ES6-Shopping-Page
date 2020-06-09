@@ -39,6 +39,10 @@
   padding-right: 0 !important;
 }
 
+.product-listing__main-title{
+  margin-top: 20px;
+}
+
 .table{
   border:1px solid #DFE0E1;
   margin-bottom: 0 !important;
@@ -79,10 +83,13 @@
     top: 0;
     bottom: 0;
     left: 40;
-    z-index: 100; /* Behind the navbar */
+    display: contents;
+    z-index: 0; /* Behind the navbar */
     padding: 48px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
   }
+
+  
   
   .sidebar-sticky {
     position: relative;
@@ -94,6 +101,10 @@
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     width:100%;
     padding:.5rem;
+  }
+
+  .sidebar__close{
+    display:none;
   }
   
   @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -154,6 +165,7 @@
   .shopping-cart{
     position: relative;
     left: -4px;
+    top:48px;
   }
 
   //Table
@@ -189,9 +201,27 @@ th     { background:#eee; }
 .checkout-cart{
   overflow-y: scroll;
   height: 42vh;
+ @media (max-width: 924px){
+   height:100vh;
+ }
   
 }
-@media (max-width: 700px) {
+
+.checkout-cart__title{
+    margin-right:10px
+}
+
+.checkout-cart__header{
+  justify-content: space-between !important;
+}
+
+.checkout-cart__container{
+  padding-left:0px;
+  top: 10px;
+    position: relative;
+}
+
+@media (max-width: 924px) {
   .active{
     display: block !important;
     position: absolute !important;
@@ -200,6 +230,58 @@ th     { background:#eee; }
  .hidden{
   display:none;
 }
+
+
+.sidebar__close{
+  display: flex !important;
+  position: relative !important;
+  top: -12px !important;
+}
+
+.sidebar-sticky{
+  margin-left: 4px
+}
+
+button.close{
+  top: -1px !important;
+}
+
+
+
+.checkout-cart__control{
+  position: absolute;
+  top: 64px;
+  right: 6px;
+  z-index:1;
+  @media (max-width: 924px) {
+    display: none !important;
+  }
+}
+}
+
+.col-md-3{
+  @media(min-width: 768){
+    max-width:100%!important;
+  }
+   
+}
+
+.product_listing .sidebar{
+  @media(min-width:768){
+    width:100%!important;
+  }
+ 
+}
+
+.checkout-cart__control-product{
+  position: absolute !important;
+    top: 9px !important;
+    right: 0 !important;
+    display:none !important;
+    @media (max-width: 924px) {
+      display: inline-block !important;
+     // right: 71px !important;
+    }
 }
 
 .product-item__product{
@@ -215,7 +297,6 @@ th     { background:#eee; }
     width: 265px;
     border: 1px solid #DEE2E6;
     float: right;
-    margin-right: 15px;
 }
 
 
@@ -297,6 +378,5 @@ th     { background:#eee; }
   }
 
   nav .sidebar{
-    position: relative !important;
-    top: -11px !important;
+    top: 28px !important;
   }
