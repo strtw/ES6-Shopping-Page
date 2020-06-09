@@ -1,0 +1,144 @@
+
+
+//Product listing table product detail styling
+
+.product-item__image {
+  width: 100%;
+}
+
+.product-item__quantity {
+  width: 55px;
+  border: none;
+}
+
+.product-item__main {
+  display: flex;
+}
+
+.product-listing {
+  border: 1px solid #f8f9fa !important;
+  padding-right: 0 !important;
+}
+
+.product-listing__main-title {
+  margin-top: 20px;
+}
+
+.table {
+  border: 1px solid #dfe0e1;
+  margin-bottom: 0 !important;
+}
+
+.table td {
+  border-top: 1px dotted #dee2e6;
+}
+
+.product-listing__price-column {
+  text-align: center;
+}
+
+.product-listing__description {
+  font-size: 0.9em;
+}
+
+.product-quantity-input input {
+    width: 100%;
+  }
+  .product-quantity-input .fa:hover {
+    cursor: pointer;
+  }
+  .product-quantity-input .fa {
+    font-size: 16px;
+    position: absolute;
+    right: 5px;
+    border-left: 1px solid #e5e5e5;
+    padding-left: 4px;
+  }
+  .product-quantity-input .fa-caret-up {
+    top: 3px;
+  }
+  .product-quantity-input .fa-caret-down {
+    bottom: 3px;
+  }
+
+
+
+
+
+//Product listing table
+
+table {
+  background-color: white;
+}
+
+.table-fix {
+  overflow-y: auto;
+  height: 100vh;
+}
+.table-fix thead th {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td {
+  padding: 8px 16px;
+}
+th {
+  background: #eee;
+}
+
+.table-fix th {
+  box-shadow: 0 0 1px 0 grey;
+}
+
+.table__blank-row {
+  height: 100px !important;
+}
+
+.table__blank-row td {
+  border: none !important;
+}
+
+.table__header {
+  display: table-footer-group;
+}
+
+
+
+
+
+.fa-caret-down:before {
+  content: "\f0d7";
+}
+.fa-caret-up:before {
+  content: "\f0d8";
+}
+
+.product-quantity-input {
+  width: 70px;
+  float: left;
+  position: relative;
+  padding-right: 0px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.product-quantity-input .fa {
+  font-size: 16px;
+  position: absolute;
+  right: 5px;
+  border-left: 1px solid #e5e5e5;
+  padding-left: 4px;
+}

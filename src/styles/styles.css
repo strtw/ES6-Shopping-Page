@@ -1,7 +1,3 @@
-[role="main"] {
-  padding-top: 48px;
-}
-
 .product-item__image {
   width: 100%;
 }
@@ -17,26 +13,8 @@
   display: flex;
 }
 
-.product-item__cart-container-button {
-  float: right !important;
-  width: 88px !important;
-  top: 2px !important;
-  position: relative !important;
-}
-
-.product-item__cart-button {
-  font-size: .6em !important;
-}
-
-.product-listing__add-selected {
-  height: 23px !important;
-  font-size: 0.5em !important;
-  width: 110px !important;
-  font-weight: 500 !important;
-}
-
 .product-listing {
-  border: 1px solid #F8F9FA !important;
+  border: 1px solid #f8f9fa !important;
   padding-right: 0 !important;
 }
 
@@ -45,7 +23,7 @@
 }
 
 .table {
-  border: 1px solid #DFE0E1;
+  border: 1px solid #dfe0e1;
   margin-bottom: 0 !important;
 }
 
@@ -53,26 +31,132 @@
   border-top: 1px dotted #dee2e6;
 }
 
-.product-listing__checkbox-column {
-  text-align: center;
-}
-
 .product-listing__price-column {
   text-align: center;
 }
 
 .product-listing__description {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
-.sticky {
-  position: fixed;
-  width: 200px;
+.product-quantity-input input {
+  width: 100%;
 }
 
-.feather {
-  width: 42px;
-  height: 23px;
+.product-quantity-input .fa:hover {
+  cursor: pointer;
+}
+
+.product-quantity-input .fa {
+  font-size: 16px;
+  position: absolute;
+  right: 5px;
+  border-left: 1px solid #e5e5e5;
+  padding-left: 4px;
+}
+
+.product-quantity-input .fa-caret-up {
+  top: 3px;
+}
+
+.product-quantity-input .fa-caret-down {
+  bottom: 3px;
+}
+
+table {
+  background-color: white;
+}
+
+.table-fix {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.table-fix thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px 16px;
+}
+
+th {
+  background: #eee;
+}
+
+.table-fix th {
+  -webkit-box-shadow: 0 0 1px 0 grey;
+          box-shadow: 0 0 1px 0 grey;
+}
+
+.table__blank-row {
+  height: 100px !important;
+}
+
+.table__blank-row td {
+  border: none !important;
+}
+
+.table__header {
+  display: table-footer-group;
+}
+
+.fa-caret-down:before {
+  content: "\f0d7";
+}
+
+.fa-caret-up:before {
+  content: "\f0d8";
+}
+
+.product-quantity-input {
+  width: 70px;
+  float: left;
+  position: relative;
+  padding-right: 0px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.product-quantity-input .fa {
+  font-size: 16px;
+  position: absolute;
+  right: 5px;
+  border-left: 1px solid #e5e5e5;
+  padding-left: 4px;
+}
+
+/*
+   * Navbar
+   */
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+          box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.shopping-cart {
+  position: relative;
+  left: -4px;
+  top: 48px;
 }
 
 /*
@@ -108,6 +192,10 @@
   display: none;
 }
 
+nav .sidebar {
+  top: 28px !important;
+}
+
 @supports ((position: -webkit-sticky) or (position: sticky)) {
   .sidebar-sticky {
     position: -webkit-sticky;
@@ -139,67 +227,6 @@
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
-}
-
-/*
-   * Content
-   */
-[role="main"] {
-  padding-top: 48px;
-  /* Space for fixed navbar */
-}
-
-/*
-   * Navbar
-   */
-.navbar-brand {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: 1rem;
-  background-color: rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
-          box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
-}
-
-.shopping-cart {
-  position: relative;
-  left: -4px;
-  top: 48px;
-}
-
-table {
-  background-color: white;
-}
-
-.table-fix {
-  overflow-y: auto;
-  height: 100vh;
-}
-
-.table-fix thead th {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background-color: #ffffff;
-}
-
-/* Just common table stuff. Really. */
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  padding: 8px 16px;
-}
-
-th {
-  background: #eee;
-}
-
-.table-fix th {
-  -webkit-box-shadow: 0 0 1px 0 grey;
-          box-shadow: 0 0 1px 0 grey;
 }
 
 .product-checkout__trash-icon {
@@ -274,18 +301,6 @@ th {
   }
 }
 
-@media (min-width: 768) {
-  .col-md-3 {
-    max-width: 100% !important;
-  }
-}
-
-@media (min-width: 768) {
-  .product_listing .sidebar {
-    width: 100% !important;
-  }
-}
-
 .checkout-cart__control-product {
   position: absolute !important;
   top: 9px !important;
@@ -299,7 +314,7 @@ th {
   }
 }
 
-.product-item__product {
+.checkout-item__product {
   width: 90% !important;
 }
 
@@ -318,63 +333,9 @@ th {
   width: 100%;
 }
 
-.container-fluid {
-  position: fixed;
-}
-
-.table__blank-row {
-  height: 100px !important;
-}
-
-.table__blank-row td {
-  border: none !important;
-}
-
-.product-quantity-input {
-  width: 70px;
-  float: left;
-  position: relative;
-  padding-right: 0px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.product-quantity-input .fa {
-  font-size: 16px;
-  position: absolute;
-  right: 5px;
-  border-left: 1px solid #e5e5e5;
-  padding-left: 4px;
-}
-
-.product-quantity-input input {
-  width: 100%;
-}
-
-.product-quantity-input .fa:hover {
-  cursor: pointer;
-}
-
-.product-quantity-input .fa {
-  font-size: 16px;
-  position: absolute;
-  right: 5px;
-  border-left: 1px solid #e5e5e5;
-  padding-left: 4px;
-}
-
-.product-quantity-input .fa-caret-up {
-  top: 3px;
-}
-
-.product-quantity-input .fa-caret-down {
-  bottom: 3px;
+.feather {
+  width: 42px;
+  height: 23px;
 }
 
 .fa-caret-down:before {
@@ -385,8 +346,16 @@ th {
   content: "\f0d8";
 }
 
-.table__header {
-  display: table-footer-group;
+/*
+Content
+*/
+[role="main"] {
+  padding-top: 48px;
+  /* Space for fixed navbar */
+}
+
+.container-fluid {
+  position: fixed;
 }
 
 .title-row {
@@ -394,9 +363,5 @@ th {
   top: 46px;
   left: 15px;
   border-bottom: 1px solid lightgray;
-}
-
-nav .sidebar {
-  top: 28px !important;
 }
 /*# sourceMappingURL=styles.css.map */
