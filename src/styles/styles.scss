@@ -36,11 +36,16 @@
 
 .product-listing{
   border:1px solid #F8F9FA !important;
+  padding-right: 0 !important;
 }
 
 .table{
   border:1px solid #DFE0E1;
   margin-bottom: 0 !important;
+}
+
+.table td{
+  border-top: 1px dotted #dee2e6;
 }
 
 .product-listing__checkbox-column{
@@ -183,14 +188,16 @@ th     { background:#eee; }
 
 .cart-add{
   position: relative;
-  bottom: 129px;
-  padding: 20px;
-  float: 0;
-  background-color: #F8F9FA;
-  width: 265px;
-  border: 1px solid #DEE2E6;
-  float: right;
+    bottom: 166px;
+    padding: 20px;
+    float: 0;
+    background-color: #F8F9FA;
+    width: 265px;
+    border: 1px solid #DEE2E6;
+    float: right;
+    margin-right: 15px;
 }
+
 
 .cart-add__button{
   width: 100%;
@@ -256,4 +263,20 @@ th     { background:#eee; }
   }
   .fa-caret-up:before {
     content: "\f0d8";
+  }
+
+  .table__header{
+    display: table-footer-group;
+  }
+
+  .title-row{
+    position: relative;
+    top: 46px;
+    left: 15px;
+    border-bottom: 1px solid lightgray;
+  }
+
+  nav .sidebar{
+    position: relative !important;
+    top: -11px !important;
   }

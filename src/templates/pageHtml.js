@@ -1,7 +1,7 @@
 export const pageHtml = 
 `<div class="container-fluid">
+        <div class="row title-row"><h4>Shop ***REMOVED***</h4></div>
         <div class="row">
-           
             <main id="product-listing" role="main" class="col product-listing" >
                <!-- Product table inserts here dynamically-->
             </main>

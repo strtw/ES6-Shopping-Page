@@ -43,12 +43,12 @@ export const productTableMaker = function productTableMaker(data) {
     return `
     <div class="table-fix" id="product-table">
     <table class="table">
-                <thead>
+                <thead class="table__header">
                     <tr>
                         <th style="width: 16.66%">Product</th>
                         <th>Description</th>
-                        <th style="width: 16.66%">Adjust Quantity</th>
-                        <th class="text-center" style="width: 16.66%">Price (USD)</th>
+                        <th style="width:16.66%">Adjust Quantity</th>
+                        <th class="text-center" style="width:16.66%">Price (USD)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@ export const productTableMaker = function productTableMaker(data) {
             </table>
             </div>
             <div id="cart-add" class="cart-add">
-            <button id="cart-add__button" class="cart-add__button btn btn-outline-success" disabled>Select items to add</button>
+            <button id="cart-add__button" class="cart-add__button btn btn-outline-success" disabled>Select item(s) to add</button>
            </div>
             `;
   }
