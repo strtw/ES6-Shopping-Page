@@ -1,28 +1,27 @@
-import {pageHtml} from '../templates/pageHtml'
-import {productTableMaker} from '../templates/productTableMaker'
+import { pageHtml } from "../templates/pageHtml";
+import { productTableMaker } from "../templates/productTableMaker";
 
 const BuildShoppingPage = (function ProductPageBuilder() {
-  let app = document.getElementById('app');
-  app.innerHTML = pageHtml;
-  
-  let productListings = document.getElementById("product-listing"); //get reference to main html element
-  let cartAddArea = document.getElementById("cart-add");
+  let app = document.getElementById("app");
+  app.innerHTML = pageHtml; //Set the main page scaffold
+
   //Public API functions
   function updateProductListing(products) {
-    if(products){
-      var table = document.createElement('div')
-      table.innerHTML = (productTableMaker(products))
-      productListings.insertBefore(table,cartAddArea); //insert product table into main element
+    //updates DOM product listing area with products
+    if (products) {
+      //if products are passed to function
+      let productListings = document.getElementById("product-listing"); //Reference to product listings area
+      let cartAddButton = document.getElementById("add-to-cart__container");
+      let table = document.createElement("div");
+      table.innerHTML = productTableMaker(products);
+      productListings.insertBefore(table, cartAddButton); //insert product table into main element
     }
   }
- 
+
   var publicAPI = {
-    updateProducts:updateProductListing
-  }
-
-  return publicAPI
-
+    updateProductListing: updateProductListing,
+  };
+  return publicAPI;
 })();
 
-
-export { BuildShoppingPage};
+export { BuildShoppingPage };

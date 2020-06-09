@@ -39,7 +39,7 @@
      padding:.5rem;
    }
  
-   .sidebar__close{
+   .checkout-cart--close{
      display:none;
    }
 
@@ -129,7 +129,7 @@
   }
   
   
-  .sidebar__close{
+  .checkout-cart--close{
     display: flex !important;
     position: relative !important;
     top: -12px !important;
@@ -157,7 +157,7 @@
   }
 
 
-  .checkout-cart__control-product{
+  .checkout-cart--open{
     position: absolute !important;
       top: 9px !important;
       right: 0 !important;
@@ -172,7 +172,7 @@
     width: 90% !important;
   }
   
-  .cart-add{
+  .add-to-cart__container{
     position: relative;
       bottom: 166px;
       padding: 20px;

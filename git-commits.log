@@ -1,0 +1,35 @@
+* a606bae : Updated comments
+* 9e763f1 : Organized scss files into partials based on component
+* ad05521 : Update styles to be more responsive
+* aab0b60 : Add cart quantity buttons which indicate current item quantity in cart
+* e5d81ab : Add media queries to display/toggle the sidecart at smaller viewports
+* 85cfb48 : Add scrolling to checkout cart if items exceed div height
+* f6dffb3 : Change add cart button color to blue to match checkout affordances, make space between trash icon and product info in checkout
+* a1bf9d8 : Remove header row from display, adjust styles which were impacted, add shopping title
+* bab469e : Modify quantity input selector
+* 1f7721f : Add blank row to end of table to prevent cart button from covering product row
+* 14fac40 : Move add cart button to sit withink product table area and adjust related styles
+* d801810 : Update readme.md
+* aff9448 : Add webpack configuration to product minified JS and CSS file
+* 8ceb980 : Move application logic and html into modules reduce tight coupling
+* b187173 : Update module structure
+* 124fb8a : Reverse order of products items to match JSON file
+* feeb1fd : Add public API and wrap ShoppingUtils in product page module
+* 091517e : Update function name and order for readablity and to make code more modular
+* 552a5c3 : Update product checkout flow
+* a9e2a71 : Clicking trash icon removes product from checkout - also resets quantity, item total, and inCart
+* d815742 : Add fixed table header & move shopping checkout to right side of page
+* fb686f8 : Update styles
+* 6de669b : Add number USD number formatter, adjust checkout header styles
+* 6becdbc : Update checkout cart with cart data, improve styles
+* 76220de : Add cartTotal and itemTotal functions & update cartTotal to cart sidebar
+* 0dfa9c0 : Improve handleListingActions function so quantitychanges effect the add selected to cart button when all quantities are 0
+* 37a4dbb : Update handleListingActions function  - Clicking 'add selected to cart' button updates product state  - Checkbox cannot be selected if product is 0, preventing 0 quantity    products from being added to cart
+* b7655f9 : Disable 'add all selected' button if no checkboxes are checked
+* 51a1364 : Update handleListing actions function
+* 149d534 : Update handleListingActions function
+* 7ab69d2 : Break out cart actions into smaller functions, add cart status
+* ec7cdfc : Add utility function to track state from product listing interactions - Add local state object to track increment/decrement of cart items
+* fc2ae62 : Implement revealing module pattern to build product listings on page
+* d49f6cc : App loads product list to page
+* 5371c85 : Create initial app scaffold

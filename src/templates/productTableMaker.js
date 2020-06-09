@@ -1,10 +1,10 @@
-import {currencyFormatter} from '../utils/shoppingHelpers'
+import { currencyFormatter } from "../utils/shoppingHelpers";
 
 export const productTableMaker = function productTableMaker(data) {
-    let tableRows = "";
-    data.map((row) => {
-      //loop through each row, data-title attribute in the price selector input to get reference to the data to be used in DOM event listeners
-      var currentRow = `<tr data-title="${row.title}">
+  let tableRows = "";
+  data.map((row) => {
+    //loop through each row, data-title attribute in the price selector input to get reference to the data to be used in DOM event listeners
+    var currentRow = `<tr data-title="${row.title}">
                                   <td class="product-item__main">
                                       <div class="">
                                           <img class="product-item__image" src="${
@@ -37,10 +37,10 @@ export const productTableMaker = function productTableMaker(data) {
                                       </div>
                                   </td>
                               </tr> `;
-      tableRows = tableRows + currentRow// ; //add each row to the previous row
-    });
-    // Return the table with the inserted tableRows
-    return `
+    tableRows = tableRows + currentRow; // ; //add each row to the previous row
+  });
+  // Return the table with the inserted tableRows
+  return `
     <div class="table-fix" id="product-table">
     <table class="table">
                 <thead class="table__header">
@@ -59,8 +59,8 @@ export const productTableMaker = function productTableMaker(data) {
                 </tbody>
             </table>
             </div>
-            <div id="cart-add" class="cart-add">
+            <div id="add-to-cart__container" class="add-to-cart__container">
             <button id="cart-add__button" class="cart-add__button btn btn-primary" disabled>Select item(s) to add</button>
            </div>
             `;
-  }
+};
