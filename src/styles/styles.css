@@ -202,6 +202,11 @@ th {
   display: inline-block;
 }
 
+.checkout-cart {
+  overflow-y: scroll;
+  height: 42vh;
+}
+
 .product-item__product {
   width: 90% !important;
 }
