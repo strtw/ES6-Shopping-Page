@@ -6,10 +6,6 @@ export const handleProductTableEvents = function handleProductTableEvents(e,stat
       "product-quantity__control"
     );
 
-    var addToCartButtonClicked = e.target.classList.contains(
-      "cart-add__button"
-    );
-
     var quantityInputs = document.querySelectorAll('.product-item__quantity')
     
     quantityInputs.forEach((input)=>{
@@ -37,17 +33,16 @@ export const handleProductTableEvents = function handleProductTableEvents(e,stat
         //remove the item from checkout
         removeFromCartIf(currentProduct, product);
       }
-
-      if (addToCartButtonClicked) {
-        product.inCart = true;
-        updateCartTotalOnPage(state.total);
-      }
+    
     });
+    
     updateStateWithCartTotal(state);
     updateProductItemTotal();
     insertCartDataIntoCheckout(state.products,state.total);
+   
 
     //Helper functions
+
 
     function changeItemQuantity(element,target){
       if(target.classList.contains('decrement')){

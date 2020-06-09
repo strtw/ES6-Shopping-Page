@@ -39,12 +39,36 @@ export const insertCartDataIntoCheckout = function insertCartDataIntoCheckout(pr
      minimumFractionDigits: 2,
    });
 
+   
+ 
+     export const updateCheckoutCartButton = function updateCheckoutCartButton(itemCount){
+      console.log("count")
+      var cartButtonItemCounts = document.querySelectorAll('.checkout-cart__control span');
+      for(var i = 0;i<cartButtonItemCounts.length; i++){
+        
+        cartButtonItemCounts[i].innerHTML = `(${itemCount})`
+      }
+      
+    
+     }
+
+    export const getNumItemsInCart = function getNumItemsInCart(state){
+       state.totalItemsInCart = 0
+       state.products.forEach((product)=>{
+          if(product.inCart){
+            state.totalItemsInCart += parseInt(product.quantity)
+           }
+       })
+     }
+
+
 export const handleCartAdd = function handleCartAdd(e,state) {
     state.products.forEach((product) => {
       if (product.quantity > 0) {
         product.inCart = true;
         updateStateWithCartTotal(state);
         updateCartTotalOnPage();
+        updateCheckoutCartButton(state.totalItemsInCart)
       }
     });
     insertCartDataIntoCheckout(state.products,state.total);

@@ -9,6 +9,7 @@ var state = {
     products: productData,
     total: 0,
     itemsSelected: 0,
+    totalItemsInCart: 0
   };
 
 
