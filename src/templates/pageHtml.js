@@ -1,3 +1,4 @@
+//d-none d-md-block
 export const pageHtml = 
 `<div class="container-fluid">
         <div class="row title-row"><h4>Shop ***REMOVED***</h4></div>
@@ -5,7 +6,7 @@ export const pageHtml =
             <main id="product-listing" role="main" class="col product-listing" >
                <!-- Product table inserts here dynamically-->
             </main>
-            <nav class="col-md-3 d-none d-md-block bg-light sidebar">
+            <nav class="bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column shopping-cart">
                         <li class="list-group-item d-flex lh-condensed">

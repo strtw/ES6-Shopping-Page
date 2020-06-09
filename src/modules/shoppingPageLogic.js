@@ -32,7 +32,20 @@ function shoppingUtils(state) {
         document.getElementById("checkout-cart").addEventListener("click", (e) => {
           handleCheckoutActions(e,state);
         });
+
+        let mql = window.matchMedia('(max-width: 700px)');
+        if(mql.matches){
+          var checkoutCart = document.querySelector(".sidebar")
+          checkoutCart.classList.add("active")
+        }else{
+          ("no match")
+        }
+
+
+
       });
+
+     
   
       //Public API functions
   

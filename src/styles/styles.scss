@@ -75,7 +75,7 @@
    */
   
   .sidebar {
-    position: fixed;
+   // position: fixed;
     top: 0;
     bottom: 0;
     left: 40;
@@ -189,6 +189,17 @@ th     { background:#eee; }
 .checkout-cart{
   overflow-y: scroll;
   height: 42vh;
+  
+}
+@media (max-width: 700px) {
+  .active{
+    display: block !important;
+    position: absolute !important;
+    width:100% !important;
+}
+ .hidden{
+  display:none;
+}
 }
 
 .product-item__product{
