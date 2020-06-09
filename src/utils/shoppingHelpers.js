@@ -9,7 +9,7 @@ export const insertCartDataIntoCheckout = function insertCartDataIntoCheckout(pr
           //Create a new cart item
           `
         <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
+          <div class="product-item__product">
             <h6 data-title="${product.title}">${product.title}</h6>
             <span class="text-muted" style={float:"right"}>${
               product.quantity

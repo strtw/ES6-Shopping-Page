@@ -60,7 +60,7 @@ export const productTableMaker = function productTableMaker(data) {
             </table>
             </div>
             <div id="cart-add" class="cart-add">
-            <button id="cart-add__button" class="cart-add__button btn btn-outline-success" disabled>Select item(s) to add</button>
+            <button id="cart-add__button" class="cart-add__button btn btn-primary" disabled>Select item(s) to add</button>
            </div>
             `;
   }
