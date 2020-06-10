@@ -14,6 +14,7 @@ export const handleProductTableEvents = function handleProductTableEvents(
     "product-quantity__control"
   );
 
+  var userTypesQuantity = e.target.classList.contains("product-item__quantity");
   var quantityInputs = document.querySelectorAll(".product-item__quantity");
 
   quantityInputs.forEach((input) => {
@@ -31,13 +32,19 @@ export const handleProductTableEvents = function handleProductTableEvents(
   if (userChangesItemQuantity) {
     var quantityInput = e.target.closest(".product-quantity-input")
       .firstElementChild;
-
     changeItemQuantity(quantityInput, e.target);
   }
 
   state.products.forEach((product) => {
     if (userChangesItemQuantity) {
       addQuantityToState(quantityInput, currentProduct, product);
+      addNumItemsSelectedToState();
+      updateCartButton(currentProduct, product);
+      //remove the item from checkout
+      removeFromCartIf(currentProduct, product);
+    }
+    if (userTypesQuantity) {
+      addQuantityToState(e.target, currentProduct, product);
       addNumItemsSelectedToState();
       updateCartButton(currentProduct, product);
       //remove the item from checkout
@@ -53,11 +60,11 @@ export const handleProductTableEvents = function handleProductTableEvents(
 
   function changeItemQuantity(element, target) {
     if (target.classList.contains("decrement")) {
-      if (quantityInput.value > 0) {
-        quantityInput.value = parseInt(quantityInput.value) - 1;
+      if (element.value > 0) {
+        element.value = parseInt(element.value) - 1;
       }
     } else {
-      quantityInput.value = parseInt(quantityInput.value) + 1;
+      element.value = parseInt(element.value) + 1;
     }
   }
 
@@ -83,13 +90,13 @@ export const handleProductTableEvents = function handleProductTableEvents(
 
   function replaceLeadingInputZero(element) {
     //Users shouldn't be able to select 002 as a quantity, only 2
-    element.value = parseInt(element.value);
+    element.value = isNaN(parseInt(element.value))
+      ? 0
+      : parseInt(element.value);
   }
 
   function resetInputToZero(element) {
-    console.log(element, element.value);
     element.addEventListener("blur", () => {
-      console.log("blur");
       if (element.value == 0) {
         element.value = "0";
       }
@@ -97,7 +104,7 @@ export const handleProductTableEvents = function handleProductTableEvents(
   }
   function addQuantityToState(element, currentProduct, product) {
     if (currentProduct.title === product.title) {
-      if (currentProduct.quantity !== e.target.value) {
+      if (element && currentProduct.quantity !== e.target.value) {
         product.quantity =
           element.value == isNaN(element.value) ? 0 : element.value;
       }

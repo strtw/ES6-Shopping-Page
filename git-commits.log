@@ -1,4 +1,4 @@
-* a606bae : Updated comments
+* 3318699 : Updated comments & readme
 * 9e763f1 : Organized scss files into partials based on component
 * ad05521 : Update styles to be more responsive
 * aab0b60 : Add cart quantity buttons which indicate current item quantity in cart

@@ -30,6 +30,22 @@ function shoppingUtils(state) {
       handleProductTableEvents(e, state);
     });
 
+    document.getElementById("product-table").addEventListener("blur", (e) => {
+      //Product table listeners
+      handleProductTableEvents(e, state);
+    });
+
+    /*
+
+    state.products.forEach((product) => {
+      addQuantityToState(input, currentProduct, product);
+      addNumItemsSelectedToState();
+      updateCartButton(currentProduct, product);
+      //remove the item from checkout
+      removeFromCartIf(currentProduct, product);
+      })
+      */
+
     document.addEventListener("click", () => {
       //Global listener that updates cart quantity and DOM
       getNumItemsInCart(state);

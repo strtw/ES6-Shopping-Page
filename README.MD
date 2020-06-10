@@ -2,7 +2,7 @@
 
 - Application entry file is index.js. 
 
-- Git commit log is in git-commits.log
+- Git commit log is in git-commits.log in root folder
 
 - I have broken the code out into modules and attempted to name them, their files, and their functions in a way that is understandable. 
 
