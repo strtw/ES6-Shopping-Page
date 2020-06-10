@@ -1,3 +1,8 @@
+//These utilities handle the checkout actions such as removing and updateing the cart total
+//They are then imported into the ShoppingPageLogic.js module which is used in the main index.js file
+//I set the code up to produce a main listener function that checks for various event types via DOM element
+//If the DOM control matches the event, then I execute the corresponding function(s)
+
 import {
   insertCartDataIntoCheckout,
   updateStateWithCartTotal,
@@ -13,11 +18,11 @@ export const handleProductTableEvents = function handleProductTableEvents(
   var userChangesItemQuantity = e.target.classList.contains(
     "product-quantity__control"
   );
-
   var userTypesQuantity = e.target.classList.contains("product-item__quantity");
   var quantityInputs = document.querySelectorAll(".product-item__quantity");
 
   quantityInputs.forEach((input) => {
+    //#5: Automatically reset the quantity input to handle potential user error.
     input.addEventListener("blur", () => {
       //When a user clicks off the quantity adjuster
       resetInputToZero(input);
@@ -36,6 +41,8 @@ export const handleProductTableEvents = function handleProductTableEvents(
   }
 
   state.products.forEach((product) => {
+    //Loop through the products and check user actions.
+    //TODO make this code more DRY by putting into helper function
     if (userChangesItemQuantity) {
       addQuantityToState(quantityInput, currentProduct, product);
       addNumItemsSelectedToState();
@@ -51,6 +58,8 @@ export const handleProductTableEvents = function handleProductTableEvents(
       removeFromCartIf(currentProduct, product);
     }
   });
+
+  //Update the state and DOM based on the user action.
 
   updateStateWithCartTotal(state);
   updateProductItemTotal();

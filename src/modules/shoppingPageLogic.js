@@ -1,3 +1,6 @@
+//Shopping page utilities contains functions that make product table and checkout dynamic
+//to achieve this we import helper funtions and eventhandlers for the cart and product listing area
+
 import { handleProductTableEvents } from "../utils/productTableHandlers";
 import { handleCheckoutActions } from "../utils/checkoutHandlers";
 import {
@@ -6,8 +9,8 @@ import {
   updateCheckoutCartButton,
 } from "../utils/shoppingHelpers";
 
-//Shopping page utilities contains functions that make product table and checkout dynamic
-
+//Main module of file, adds some new defaults to state and adds event listeners to the application
+//to listen for changes to state.
 function shoppingUtils(state) {
   var checkoutCart = document.querySelector(".sidebar");
 
@@ -17,9 +20,8 @@ function shoppingUtils(state) {
     product.inCart = false;
   });
 
+  //Once content is loaded
   document.addEventListener("DOMContentLoaded", function (event) {
-    //Once content is loaded
-
     document.getElementById("product-table").addEventListener("keyup", (e) => {
       //Product table listeners
       handleProductTableEvents(e, state);
@@ -34,17 +36,6 @@ function shoppingUtils(state) {
       //Product table listeners
       handleProductTableEvents(e, state);
     });
-
-    /*
-
-    state.products.forEach((product) => {
-      addQuantityToState(input, currentProduct, product);
-      addNumItemsSelectedToState();
-      updateCartButton(currentProduct, product);
-      //remove the item from checkout
-      removeFromCartIf(currentProduct, product);
-      })
-      */
 
     document.addEventListener("click", () => {
       //Global listener that updates cart quantity and DOM
@@ -91,7 +82,7 @@ function shoppingUtils(state) {
     }
   });
 
-  //Public API functions
+  //This is the Public API which allows a developer or user to get the application state at any point.
 
   function getState() {
     return state;
@@ -104,4 +95,5 @@ function shoppingUtils(state) {
   return publicAPI;
 }
 
+//Export this file to be imported by the Index files, the main application file.
 export default shoppingUtils;

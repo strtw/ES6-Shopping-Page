@@ -1,3 +1,6 @@
+//These utilities handle the checkout actions such as removing and updateing the cart total
+//They are then imported into the ShoppingPageLogic.js module which is used in the main index.js file
+
 import {
   insertCartDataIntoCheckout,
   updateCartTotalOnPage,
@@ -6,12 +9,12 @@ import {
 
 export const handleCheckoutActions = function handleCheckoutActions(e, state) {
   (function userRemovesItemFromCheckout() {
-    //Execute this function on every checkout action
+    //Execute this function on every checkout action, in order to have the most updated state.
     var cartTrashIconClicked = e.target.closest(
-      //User clicked the trash icon
       ".product-checkout__trash-icon"
     );
 
+    //Remove items from cart, if trash icon is clicked
     if (cartTrashIconClicked) {
       var productTitle =
         cartTrashIconClicked.previousElementSibling.previousElementSibling
@@ -27,7 +30,7 @@ export const handleCheckoutActions = function handleCheckoutActions(e, state) {
           resetItemQuantityInput(productQuantity); //Reset the item quantity selector in the product page to 0
         }
       });
-      //Get the state we just updated and:
+      //Get the state we just updated and update the checkout in the DOM.
       insertCartDataIntoCheckout(state.products, state.total);
       updateStateWithCartTotal(state);
       updateCartTotalOnPage(state.total);

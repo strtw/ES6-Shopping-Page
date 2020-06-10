@@ -1,3 +1,6 @@
+//Shopping helpers are functions that are used by product and checkout handlers, so it made sense to
+//put them in a separate file so the handlers could import them as needed.
+
 export const insertCartDataIntoCheckout = function insertCartDataIntoCheckout(
   products,
   total
