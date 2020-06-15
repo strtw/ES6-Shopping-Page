@@ -1,6 +1,6 @@
 export const pageHtml = `<div class="container-fluid">
         <div class="row title-row">
-             <h4 class="product-listing__main-title">Shop ***REMOVED***</h4>
+             <h4 class="product-listing__main-title">Shop Products</h4>
              </div>
             
         <div class="row">

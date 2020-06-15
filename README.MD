@@ -8,10 +8,6 @@
 
 - Code formatting with prettier and linting with eslint
 
-## Presentation link
-
-***REMOVED***
-
 # Project structure
 
 - #### Styles 
