@@ -14,7 +14,7 @@ export const pageHtml = `<div class="container-fluid">
             </main>
             <nav class="bg-light sidebar">
            
-            <-- This is the shopping cart scaffold --> 
+            <!-- This is the shopping cart scaffold --> 
             
                 <div id="sidebar_sticky" class="sidebar-sticky col-lg-3 col-sm-12 d-md-block d-sm-block bg-light sidebar pull-right">
                    <ul class="checkout-cart__container">
