@@ -1,25 +1,31 @@
+# Presentation 
+
+https://docs.google.com/presentation/d/177wfoht4gURTMTe_qCanYqa6yFVTrK4j-6JT1aSKlo0/edit?usp=sharing
+
+# Live Site
+
+https://strtw.github.io/ES6-Shopping-Page/dist/index.html
+
 # Project Notes
 
 - Application entry file is index.js. 
 
-- Git commit log is in git-commits.log in root folder
-
-- I have broken the code out into modules and attempted to name them, their files, and their functions in a way that is understandable. 
+- State is managed by updating a state object at the top of index.js
 
 - Code formatting with prettier and linting with eslint
 
 # Project structure
 
-- #### Styles 
+- #### styles 
     - SCSS partials that load up to main.min.css
 
-- #### Modules
+- #### modules
     - Main application modules composed from utils and templates
 
-- #### Templates 
+- #### templates 
     - This is where html creators or template literals live that the application uses to build the html
 
-- #### Utils
+- #### utils
     - Helpers and event handlers for the app
 
 
